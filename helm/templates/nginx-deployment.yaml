@@ -33,6 +33,6 @@ spec:
       restartPolicy: Always
       volumes:
       - hostPath:
-          path: /home/thomas/sujet1/nginx.conf
+        path: ""
         name: nginx-hostpath0
 status: {}

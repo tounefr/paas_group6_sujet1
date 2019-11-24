@@ -40,6 +40,6 @@ spec:
       restartPolicy: Always
       volumes:
       - hostPath:
-          path: /home/thomas/sujet1/db/init.sql
+          path: ""
         name: db-hostpath0
 status: {}
