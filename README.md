@@ -18,38 +18,42 @@ Pour lancer le projet:
 * Configuer jenkins pour le CI
 * Mettre jenkins et l'app sur un namespace distinct
 
-### Construire l'image et push vers un registry
+## Installation
+
+### Construire l'image de l'app et push vers un registry
 ```bash
 cd /api
 docker build .
-
-cd ..
-docker-compose up
+docker login
+docker push
 ```
 
-### Générer un chart à partir de docker-compose
-`kompose convert -c -o helm --build none --volumes hostPath`
+### Création du chart à partir de Docker-Compose et installation
+```bash
+kompose convert -c -o helm --build none --volumes hostPath
+helm install --namespace epi-paas-subject1 --name epi-paas-app-subject1 ./helm/
+```
 
-### Installer le chart
-`helm install --namespace epi-paas-subject1 --name epi-paas-app-subject1 ./helm/`
-
-### Mettre le chart à jour
-`helm upgrade epi-paas-app-subject1 ./helm/`
-
-### Supprimer le chart
-`helm delete --purge epi-paas-app-subject1`
-
-### Créer le wildcard TLS pour l'ingress
+### Ingress NGINX
+#### Créer le wildcard TLS pour l'ingress
 `kubectl create secret -n epi-paas-subject1 tls wildcard-paas-epi --key privkey.pem --cert fullchain.pem`
 
-### Installer l'ingress
+#### Helm
 `helm install --namespace epi-paas-subject1 --name nginx-ingress stable/nginx-ingress`
 
-### Patch ingress
+#### Patch ingress
 `kubectl patch service nginx-ingress-controller -n epi-paas-subject1 -p '{"spec": {"type": "LoadBalancer", "externalIPs":["192.168.126.4"]}}'`
 
-### Créer ingress de l'app
+#### Créer ingress de l'app
 `kubectl create  --namespace epi-paas-subject1 -f ./ingress.yml`
+
+#### Mettre le chart à jour
+`helm upgrade epi-paas-app-subject1 ./helm/`
+
+#### Supprimer le chart
+`helm delete --purge epi-paas-app-subject1`
+
+### CI
 
 ### Installer jenkins
 `helm install --name jenkins --namespace epi-paas-subject1 stable/jenkins`
