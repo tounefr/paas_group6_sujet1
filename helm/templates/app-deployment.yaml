@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -c -o helm --build none --volumes hostPath
+    kompose.version: 1.19.0 (f63a961c)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: app
+  name: app
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -c -o helm --build none --volumes hostPath
+        kompose.version: 1.19.0 (f63a961c)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: app
+    spec:
+      containers:
+      - env:
+        - name: DB_HOST
+          value: db
+        - name: DB_NAME
+          value: dbtest
+        - name: DB_PASSWORD
+          value: azerazer
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: testusr
+        - name: REDIS_HOST
+          value: redis
+        - name: REDIS_PORT
+          value: "6379"
+        image: epik8s/epi_2020_group6_paas:1.1
+        name: app
+        ports:
+        - containerPort: 3000
+        resources: {}
+      restartPolicy: Always
+status: {}
