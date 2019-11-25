@@ -4,11 +4,11 @@ Groupe6 : regroupant les villes Lyon, Strasbourg et Toulouse
 
 Membres du groupe :
 
-- jordan.augier@epitech.eu (Lyon)
-- jacques.mingeon@epitech.eu (Lyon)
-- thomas.henon@epitech.eu (Strasbourg)
-- aurelien.darragon@epitech.eu (Strasbourg)
-- thomas.lemoine@epitech.eu (Toulouse)
+- jordan.augier (Lyon)
+- jacques.mingeon (Lyon)
+- thomas.henon (Strasbourg)
+- aurelien.darragon (Strasbourg)
+- thomas.lemoine (Toulouse)
 
 ## Installation
 
